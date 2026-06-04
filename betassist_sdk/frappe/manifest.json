@@ -1,0 +1,23 @@
+{
+  "name": "betassist",
+  "version": "1.0.0",
+  "doctypes": [
+    "user_profile",
+    "bet_record",
+    "match",
+    "match_analysis",
+    "team",
+    "followed_team",
+    "unfollow_log"
+  ],
+  "hooks": {
+    "scheduler_events": {
+      "daily": [
+        "betassist.tasks.sync_prediction_analysis"
+      ]
+    },
+    "override_doctype_class": {
+      "User": "betassist.doctype.user_profile.user_profile.UserProfile"
+    }
+  }
+}

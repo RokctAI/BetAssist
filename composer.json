@@ -1,0 +1,12 @@
+{
+  "name": "betassist_app",
+  "version": "1.0.0",
+  "description": "Frappe App Shell for BetAssist",
+  "modules": [
+    {
+      "name": "betassist",
+      "enabled": true,
+      "path": "../betassist_sdk/frappe"
+    }
+  ]
+}
