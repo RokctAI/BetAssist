@@ -1,7 +1,14 @@
 import sys
 import os
-# Add .rokct to path to import the base installer
-sys.path.append(os.path.join(os.getcwd(), '.rokct'))
+
+def get_safe_path(base, path):
+    abs_base = os.path.abspath(base)
+    abs_path = os.path.abspath(os.path.join(base, path))
+    if not abs_path.startswith(abs_base):
+        raise RuntimeError('Path containment violation')
+    return abs_path
+
+sys.path.append(get_safe_path(os.getcwd(), '.rokct'))
 import sdk_installer_base
 
 if __name__ == '__main__':
