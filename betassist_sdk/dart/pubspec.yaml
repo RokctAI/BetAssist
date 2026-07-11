@@ -16,11 +16,11 @@ dependencies:
   # Hardware Sensors (Gyroscope)
   get_it: ^9.2.0
   core_sdk:
-    path: ../../core/dart
+    path: ../core
   onboarding_sdk:
-    path: ../../onboarding/dart
+    path: ../onboarding
   hardware_sdk:
-    path: ../../hardware/dart
+    path: ../hardware
 
 
 
