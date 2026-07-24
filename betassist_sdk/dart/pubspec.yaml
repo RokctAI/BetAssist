@@ -14,9 +14,9 @@ dependencies:
   flip_card: ^0.7.0
 
   # Hardware Sensors (Gyroscope)
-  get_it: ^9.2.0
-  core_sdk:
-    path: ../core
+  get_it: ^8.0.0
+  base_sdk:
+    path: ../base
   onboarding_sdk:
     path: ../onboarding
   hardware_sdk:
@@ -24,7 +24,12 @@ dependencies:
 
 
 
-
-
 dependency_overrides:
   http: ^1.2.0
+  base_sdk:
+    path: ../../../core/base/dart
+  onboarding_sdk:
+    path: ../../../Users/onboarding/dart
+  hardware_sdk:
+    path: ../../../hardware/hardware/dart
+

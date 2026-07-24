@@ -3,21 +3,21 @@
       "git": "https://github.com/RokctAI/Users",
       "dart": "../Users/users/dart",
       "frappe": "../Users/users/frappe",
-      "public": true,
+      "public": false,
       "ref": "main"
     },
     {
       "git": "https://github.com/RokctAI/core",
-      "dart": "../core/core/dart",
-      "frappe": "../core/core/frappe",
-      "public": true,
+      "dart": "../core/base/dart",
+      "frappe": "../core/base/frappe",
+      "public": false,
       "ref": "main"
     },
     {
       "git": "https://github.com/RokctAI/hardware",
       "dart": "../hardware/hardware/dart",
       "frappe": "../hardware/hardware/frappe",
-      "public": true,
+      "public": false,
       "ref": "main"
     }
 ]

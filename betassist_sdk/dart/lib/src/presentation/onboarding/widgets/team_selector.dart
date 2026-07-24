@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:core_sdk/core_sdk.dart'; // Import AppStyle and core styles
+import 'package:base_sdk/src/presentation/theme/app_style.dart'; // Import AppStyle and core styles
 
 class TeamSelectorWidget extends StatefulWidget {
   final String title;
