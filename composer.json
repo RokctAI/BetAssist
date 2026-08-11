@@ -6,7 +6,7 @@
     {
       "name": "betassist",
       "enabled": true,
-      "path": "../BetAssist/betassist_sdk/frappe"
+      "path": "../commerce/betassist/frappe"
     }
   ]
 }
