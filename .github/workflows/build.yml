@@ -1,0 +1,66 @@
+name: Build (Smart)
+
+permissions: write-all
+
+# A newer push to the same branch supersedes the in-flight CI run — cancel it
+# instead of queueing a full pipeline per intermediate commit.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  # --- 1. DETECT PROJECT TYPE ---
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      is_flutter: ${{ steps.check.outputs.is_flutter }}
+      is_node: ${{ steps.check.outputs.is_node }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Project Type
+        id: check
+        run: |
+          if [ -f "pubspec.yaml" ]; then
+             echo "Flutter project detected."
+             echo "is_flutter=true" >> "$GITHUB_OUTPUT"
+             echo "is_node=false" >> "$GITHUB_OUTPUT"
+          elif [ -f "package.json" ]; then
+             echo "Node.js project detected."
+             echo "is_flutter=false" >> "$GITHUB_OUTPUT"
+             echo "is_node=true" >> "$GITHUB_OUTPUT"
+          else
+             echo "Unknown project type. Skipping builds."
+             echo "is_flutter=false" >> "$GITHUB_OUTPUT"
+             echo "is_node=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  # --- 2. UNIFIED PIPELINE (Smart) ---
+  pipeline:
+    needs: detect
+    uses: RokctAI/shared-workflows/.github/workflows/universal-pipeline.yml@main
+    with:
+      # BetAssist is a Frappe app shell (no pubspec.yaml / package.json), so the
+      # detect job falls through to 'frappe' today; the expression stays smart in
+      # case the shell ever grows a Dart or Node surface.
+      project_type: ${{ needs.detect.outputs.is_flutter == 'true' && 'flutter' || (needs.detect.outputs.is_node == 'true' && 'node' || 'frappe') }}
+      # Quality Gate Toggles
+      run_security: true
+      # Skip lint on pushes to main only: Code Quality (linter.yml) runs the identical
+      # lint job on the same SHA there. Every other event/branch keeps linting here.
+      run_lint: ${{ github.event_name != 'push' || github.ref_name != 'main' }}
+      run_ci: true
+      # Deployment Configuration: fleet-standard weekly strategy —
+      # develop -> -dev prerelease, main -> stable/RC per version file.
+      release_strategy: 'weekly'
+      # RC Cleanup: Delete RC releases/tags after promotion to stable
+      cleanup_rc_releases: true
+      # Brain Endpoint (AI release notes)
+      brain_endpoint: https://platform.rokct.ai/api/method/brain.api.generate_release_notes
+    secrets: inherit
