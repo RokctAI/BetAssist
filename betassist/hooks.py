@@ -7,7 +7,13 @@ app_license = "mit"
 
 # Installation Hooks
 # ------------------
-after_install = "betassist.install.after_install"
+# No shell-owned install hook: betassist/install.py does not exist (in this
+# shell or in the composed commerce module), so a hardcoded
+# after_install = "betassist.install.after_install" made every
+# `bench install-app betassist` fail with an ImportError before the app
+# could finish installing. Modules that need install steps declare
+# after_install in their manifest.json; the backend composer merges those
+# in additively.
 
 
 # DocType Configurations
