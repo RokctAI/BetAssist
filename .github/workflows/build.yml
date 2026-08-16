@@ -44,7 +44,7 @@ jobs:
   # --- 2. UNIFIED PIPELINE (Smart) ---
   pipeline:
     needs: detect
-    uses: RokctAI/shared-workflows/.github/workflows/universal-pipeline.yml@main
+    uses: RokctAI/shared-workflows/.github/workflows/universal-pipeline.yml@2e09100bff536b515af206195619d4713c640462 # shared-workflows PR #416 (gateway envelope)
     with:
       # BetAssist is a Frappe app shell (no pubspec.yaml / package.json), so the
       # detect job falls through to 'frappe' today; the expression stays smart in
@@ -62,5 +62,5 @@ jobs:
       # RC Cleanup: Delete RC releases/tags after promotion to stable
       cleanup_rc_releases: true
       # Brain Endpoint (AI release notes)
-      brain_endpoint: https://platform.rokct.ai/api/method/rcore.api.brain.generate_release_notes
+      brain_endpoint: https://platform.rokct.ai/api/method/rokct.platform.api
     secrets: inherit
