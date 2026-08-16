@@ -7,35 +7,14 @@ app_license = "mit"
 
 # Installation Hooks
 # ------------------
-after_install = "betassist.install.after_install"
-
+# NOTE: This standalone app currently ships no Python modules beyond hooks.py.
+# The previous after_install, scheduler_events, and website_route_rules entries
+# pointed at modules (betassist.install, betassist.betassist.tasks,
+# betassist.betassist.api) that do not exist in this repository — installing the
+# app registered scheduler jobs and routes that crashed on import. The working
+# implementations live in the composed betassist module inside rokctai/commerce.
+# Re-add these hooks only together with the corresponding modules.
 
 # DocType Configurations
 # ---------------------
 # Document events or overrides can go here
-
-# Scheduled Tasks
-# ---------------
-scheduler_events = {
-	"hourly": [
-		"betassist.betassist.tasks.trigger_match_analysis"
-	],
-	"daily": [
-		"betassist.betassist.tasks.check_match_results",
-		"betassist.betassist.tasks.reset_weekly_unfollows"
-	],
-	"cron": {
-		"0 0 1 * *": [
-			"betassist.betassist.tasks.reset_monthly_budgets"
-		]
-	}
-}
-
-# API Route Overrides
-# -------------------
-website_route_rules = [
-	{"from_route": "/api/v1/matches", "to_route": "betassist.betassist.api.get_matches_feed"},
-	{"from_route": "/api/v1/bets", "to_route": "betassist.betassist.api.log_bet"},
-	{"from_route": "/api/v1/user/register", "to_route": "betassist.betassist.api.register_user"},
-	{"from_route": "/api/v1/user/offboard", "to_route": "betassist.betassist.api.offboard_partner"}
-]
