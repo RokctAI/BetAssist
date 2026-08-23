@@ -2,11 +2,12 @@
   "name": "betassist_app",
   "version": "1.0.0",
   "description": "Frappe App Shell for BetAssist",
+  "_comment": "The betassist backend module now lives in this repo (betassist/frappe) per the owner ruling of 2026-08-23; the earlier mock module at ../commerce/betassist/frappe is superseded and pending retirement in a follow-up commerce PR.",
   "modules": [
     {
       "name": "betassist",
       "enabled": true,
-      "path": "../commerce/betassist/frappe"
+      "path": "betassist/frappe"
     }
   ]
 }

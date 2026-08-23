@@ -1,3 +1,5 @@
+> **SUPERSEDED (2026-08-23).** This specification predates the fleet single-gateway rule and no longer describes the shipped surface. The mobile client half ships as the `betassist_sdk` Dart SDK (commerce repo, `betassist/dart`) — not as native `.aar`/`.xcframework` binaries — and the backend is not reachable via the direct REST routes below. All backend commands are dispatched through the single platform gateway (`POST /api/v1/method/rokct.platform.api` with `cmd` set to the prefix-free manifest key, e.g. `api.betassist.get_matches_feed`), as declared in this repo's `betassist/frappe/manifest.json`. This file is retained for historical context only — do not implement against it.
+
 # BetAssist Mobile SDK & REST API Specifications
 
 This document outlines the public interface for the compiled BetAssist Mobile SDK (`.aar` and `.xcframework`) and the backend REST API endpoints hosted on the Rokct PAAS stack.

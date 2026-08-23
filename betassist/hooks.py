@@ -27,13 +27,13 @@ app_license = "mit"
 
 # Installation Hooks
 # ------------------
-# NOTE: This standalone app currently ships no Python modules beyond hooks.py.
-# The previous after_install, scheduler_events, and website_route_rules entries
-# pointed at modules (betassist.install, betassist.betassist.tasks,
-# betassist.betassist.api) that do not exist in this repository — installing the
-# app registered scheduler jobs and routes that crashed on import. The working
-# implementations live in the composed betassist module inside rokctai/commerce.
-# Re-add these hooks only together with the corresponding modules.
+# NOTE: This shell file intentionally declares identity keys only. The backend
+# implementation lives in the composable SDK module at betassist/frappe/ in
+# this repo (see composer.json): the frappe composer copies the module into the
+# target app shell and appends its scheduler_events and whitelisted method
+# aliases from betassist/frappe/manifest.json to the composed hooks.py.
+# Do not hand-register scheduler jobs or routes here — they would point at
+# modules that only exist post-compose.
 
 # DocType Configurations
 # ---------------------
