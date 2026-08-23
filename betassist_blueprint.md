@@ -78,14 +78,17 @@ The app prevents emotional betting on favorite teams by hiding the action button
     *   Lightweight localized OCR for scoreboard reading.
 *   **Communication:** WebSockets connection to the Frappe backend for streaming odds adjustments and live match milestones.
 
-### B. Backend (Frappe Framework)
-*   **Match Analysis Engine:** A scheduled job fetches pre-match data (48 hours prior) from **API-Football (api-sports.io)**, formats it into a context prompt, and calls the Anthropic Claude API to generate the plain English "Why Win / Why Lose" analysis and confidence baseline.
-*   **Affiliate Outflow:** Betting buttons construct tracking deep-links containing affiliate codes for Betway SA and Hollywoodbets SA, pre-filling the user's betslip on their web platform.
+### B. Backend (Frappe Framework) — IMPLEMENTED (2026-08, `betassist/frappe` module in this repo)
+*   **Match Analysis Engine:** A scheduled job (`trigger_match_analysis`, daily) fetches pre-match data (48 hours prior, configurable) from **API-Football (api-sports.io)** — team form and head-to-head via `api_football.py` — assembles it into a role-separated context prompt, and calls the insight provider hook (`insights.py`) to generate the plain English "Why Win / Why Lose" analysis and confidence baseline. The LLM endpoint, key, and model are configured in the **BetAssist Settings** doctype / site config (nothing vendor-specific is hardcoded); when no provider is configured a deterministic statistical fallback writes the analysis from the same real stats.
+*   **Data Sync:** `sync_fixtures` (daily) upserts upcoming fixtures for the configured leagues into the Match/Team cache doctypes; `sync_match_results` (hourly) syncs live/final scores and settles pending Bet Records.
+*   **Affiliate Outflow:** The `api.betassist.get_affiliate_link` gateway command constructs tracking deep-links containing affiliate codes for Betway SA and Hollywoodbets SA (codes/base URLs in BetAssist Settings), pre-filling the user's betslip on their web platform, and records each outflow in the **Affiliate Outflow** doctype for commission auditing. Bias-locked matches never get links.
 
 ---
 
-## 5. Next Steps & Phase 1 Scope
-1.  Initialize custom Frappe App (`betassist`) inside the Monorepo.
-2.  Build out the database schemas (User Profile, Match, Match Analysis, Bet Record, Team).
-3.  Implement the API-Football synchronization service.
-4.  Build the AI prompt template that structures the plain-English analysis response.
+## 5. Next Steps & Phase 1 Scope — STATUS
+1.  ~~Initialize custom Frappe App (`betassist`) inside the Monorepo.~~ **Done** — this repo is the app shell; the composable SDK module lives at `betassist/frappe/` (see `composer.json`).
+2.  ~~Build out the database schemas (User Profile, Match, Match Analysis, Bet Record, Team).~~ **Done** — plus Followed Team, Unfollow Log, Affiliate Outflow, and the BetAssist Settings single doctype (API keys live in settings/site config, never in the repo).
+3.  ~~Implement the API-Football synchronization service.~~ **Done** — `src/tenant/api_football.py` + the `sync_fixtures`/`sync_match_results` scheduled tasks.
+4.  ~~Build the AI prompt template that structures the plain-English analysis response.~~ **Done** — `src/tenant/insights.py` (provider hook + deterministic fallback).
+
+Remaining follow-ups: retire the superseded mock module at `commerce/betassist/frappe` (separate commerce PR); wire the Dart client's data layer to the gateway commands listed in `betassist/frappe/manifest.json`; and re-point the follow-team storage adapter (`src/tenant/follows.py`) at the generic fav SDK (`agent/fav/frappe`, ADR-003) once the fav SDK supports BetAssist's anonymous partner-scoped identities (per Ray, 2026-08-23).
