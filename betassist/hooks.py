@@ -38,3 +38,39 @@ app_license = "mit"
 # DocType Configurations
 # ---------------------
 # Document events or overrides can go here
+
+
+# --- BEG OF DYNAMIC SDK HOOKS ---
+
+# --- Module: betassist (tenant) ---
+scheduler_events = globals().get('scheduler_events', {})
+scheduler_events.setdefault('hourly', [])
+for _t in ['betassist.betassist.tenant.tasks.sync_match_results']:
+    if _t not in scheduler_events['hourly']: scheduler_events['hourly'].append(_t)
+scheduler_events = globals().get('scheduler_events', {})
+scheduler_events.setdefault('daily', [])
+for _t in ['betassist.betassist.tenant.tasks.sync_fixtures', 'betassist.betassist.tenant.tasks.trigger_match_analysis', 'betassist.betassist.tenant.tasks.reset_weekly_unfollows']:
+    if _t not in scheduler_events['daily']: scheduler_events['daily'].append(_t)
+scheduler_events = globals().get('scheduler_events', {})
+scheduler_events.setdefault('monthly', [])
+for _t in ['betassist.betassist.tenant.tasks.reset_monthly_budgets']:
+    if _t not in scheduler_events['monthly']: scheduler_events['monthly'].append(_t)
+whitelisted_methods = globals().get('whitelisted_methods', {})
+override_whitelisted_methods = globals().get('override_whitelisted_methods', {})
+whitelisted_methods['betassist.api.betassist.register_user'] = 'betassist.betassist.tenant.api.betassist.register_user'
+override_whitelisted_methods['betassist.api.betassist.register_user'] = 'betassist.betassist.tenant.api.betassist.register_user'
+whitelisted_methods['betassist.api.betassist.get_matches_feed'] = 'betassist.betassist.tenant.api.betassist.get_matches_feed'
+override_whitelisted_methods['betassist.api.betassist.get_matches_feed'] = 'betassist.betassist.tenant.api.betassist.get_matches_feed'
+whitelisted_methods['betassist.api.betassist.log_bet'] = 'betassist.betassist.tenant.api.betassist.log_bet'
+override_whitelisted_methods['betassist.api.betassist.log_bet'] = 'betassist.betassist.tenant.api.betassist.log_bet'
+whitelisted_methods['betassist.api.betassist.offboard_partner'] = 'betassist.betassist.tenant.api.betassist.offboard_partner'
+override_whitelisted_methods['betassist.api.betassist.offboard_partner'] = 'betassist.betassist.tenant.api.betassist.offboard_partner'
+whitelisted_methods['betassist.api.betassist.update_profile'] = 'betassist.betassist.tenant.api.betassist.update_profile'
+override_whitelisted_methods['betassist.api.betassist.update_profile'] = 'betassist.betassist.tenant.api.betassist.update_profile'
+whitelisted_methods['betassist.api.betassist.follow_team'] = 'betassist.betassist.tenant.api.betassist.follow_team'
+override_whitelisted_methods['betassist.api.betassist.follow_team'] = 'betassist.betassist.tenant.api.betassist.follow_team'
+whitelisted_methods['betassist.api.betassist.unfollow_team'] = 'betassist.betassist.tenant.api.betassist.unfollow_team'
+override_whitelisted_methods['betassist.api.betassist.unfollow_team'] = 'betassist.betassist.tenant.api.betassist.unfollow_team'
+whitelisted_methods['betassist.api.betassist.get_affiliate_link'] = 'betassist.betassist.tenant.api.betassist.get_affiliate_link'
+override_whitelisted_methods['betassist.api.betassist.get_affiliate_link'] = 'betassist.betassist.tenant.api.betassist.get_affiliate_link'
+# --- END OF DYNAMIC SDK HOOKS ---
