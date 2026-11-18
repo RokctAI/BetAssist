@@ -1,0 +1,1 @@
+# Play listing title suffix, optional. Write the suffix on its own line, or leave this file empty for no suffix. The store title is the app name plus this suffix. Lines starting with # are ignored.
