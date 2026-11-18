@@ -1,6 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+﻿<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="betassist_app"
+        android:label="BetAssist"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

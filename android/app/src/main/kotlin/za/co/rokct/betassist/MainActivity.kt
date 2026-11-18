@@ -1,4 +1,4 @@
-package za.co.rokct.betassist_app
+﻿package za.co.rokct.betassist
 
 import io.flutter.embedding.android.FlutterActivity
 
