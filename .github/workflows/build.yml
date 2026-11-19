@@ -44,7 +44,7 @@ jobs:
   # --- 2. UNIFIED PIPELINE (Smart) ---
   pipeline:
     needs: detect
-    uses: RokctAI/shared-workflows/.github/workflows/universal-pipeline.yml@b41cc5ff4404112cae6516e7aed91eefdfb8a201 # shared-workflows main (gateway envelope)
+    uses: RokctAI/shared-workflows/.github/workflows/universal-pipeline.yml@657c0bf148ebc58c65adfd954020069589346548 # shared-workflows main @ 2026-11-19
     with:
       # BetAssist is a Frappe app shell (no pubspec.yaml / package.json), so the
       # detect job falls through to 'frappe' today; the expression stays smart in
