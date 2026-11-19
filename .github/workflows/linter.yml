@@ -1,5 +1,4 @@
 name: Code Quality
-permissions: write-all
 on:
   workflow_dispatch:
   schedule:
@@ -10,9 +9,8 @@ on:
 
 jobs:
   lint:
+    permissions: write-all
     uses: RokctAI/shared-workflows/.github/workflows/universal-linter.yml@main
     with:
-      # Frappe/Python shell — project_type is left to the linter's smart
-      # detection; copyright-text mirrors the frappe-side convention (commerce).
-      copyright-text: "Rokct Intelligence (pty) Ltd."
+      run-build-runner: true
     secrets: inherit

@@ -1,5 +1,4 @@
 name: Security Scan
-permissions: write-all
 on:
   push:
     branches: [main]
@@ -7,5 +6,6 @@ on:
 
 jobs:
   scan:
+    permissions: write-all
     uses: RokctAI/shared-workflows/.github/workflows/universal-security.yml@main
     secrets: inherit
