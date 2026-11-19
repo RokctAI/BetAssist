@@ -1,4 +1,4 @@
-﻿name: Build (Smart)
+name: Build (Smart)
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
