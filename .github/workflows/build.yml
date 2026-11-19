@@ -1,4 +1,4 @@
-name: Build (Smart)
+﻿name: Build (Smart)
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -110,5 +110,5 @@ jobs:
       flutter-version: ${{ inputs.flutter-version || '3.44.9' }}
       java-version: ${{ inputs.java-version || '17' }}
       version_format: ${{ inputs.version_format || '##.##.##' }}
-      app-type: 'customer'
+      app-type: 'betassist'
     secrets: inherit
