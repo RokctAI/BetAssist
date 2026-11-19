@@ -1,0 +1,1 @@
+# Play listing full description, max 4000 characters. Filled from the README store-description block on each release. Lines starting with # are ignored.
