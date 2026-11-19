@@ -1,10 +1,10 @@
-name: Play Store Deploy
+﻿name: Play Store Deploy
 
 # Distributed to every RokctAI repo from The-Rokct-Protocol
 # (workflows/.rok/play-deploy.yml) by .rokct/initiate.py, which copies each
 # file in workflows/.rok/ into the consumer repo's .github/workflows/.
 # Edit the copy in The-Rokct-Protocol, not the deployed copy in a consumer
-# repo — local edits are overwritten on the next initiate run.
+# repo â€” local edits are overwritten on the next initiate run.
 #
 # Must grant at least what the called reusable workflow declares
 # (universal-play-deploy.yml sets `permissions: write-all`). A narrower
@@ -24,7 +24,7 @@ jobs:
   # secrets repo at .env/production.env: the single place package names are
   # changed. build.gradle is not read, so the job works for every deploy.
   resolve-package:
-    name: 📦 Resolve Package From production.env
+    name: ðŸ“¦ Resolve Package From production.env
     runs-on: ubuntu-latest
     outputs:
       is_android_app: ${{ steps.resolve.outputs.is_android_app }}
@@ -43,7 +43,7 @@ jobs:
           # are not Android apps skip cleanly.
           if [ ! -f "android/app/build.gradle" ]; then
             echo "is_android_app=false" >> "$GITHUB_OUTPUT"
-            echo "⏭️ Not an Android app repo (no android/app/build.gradle). Skipping Play deploy."
+            echo "â­ï¸ Not an Android app repo (no android/app/build.gradle). Skipping Play deploy."
             exit 0
           fi
           echo "is_android_app=true" >> "$GITHUB_OUTPUT"
@@ -74,21 +74,21 @@ jobs:
           rm -f "$ENV_FILE"
 
           if [ -z "$PKG" ]; then
-            echo "::error::$VAR is not set in Occultation .env/production.env. Add it there — that file is the single source of truth for Play package names."
+            echo "::error::$VAR is not set in Occultation .env/production.env. Add it there â€” that file is the single source of truth for Play package names."
             exit 1
           fi
           case "$PKG" in
             *'$'*)
-              echo "::error::$VAR in production.env resolves to '$PKG', an unexpanded reference — set it to the literal applicationId."
+              echo "::error::$VAR in production.env resolves to '$PKG', an unexpanded reference â€” set it to the literal applicationId."
               exit 1
               ;;
           esac
 
           echo "package_name=$PKG" >> "$GITHUB_OUTPUT"
-          echo "✅ Resolved package: $PKG"
+          echo "âœ… Resolved package: $PKG"
 
   play-deploy:
-    name: 🚀 Play Deploy
+    name: ðŸš€ Play Deploy
     needs: resolve-package
     if: needs.resolve-package.outputs.is_android_app == 'true'
     uses: RokctAI/shared-workflows/.github/workflows/universal-play-deploy.yml@main
