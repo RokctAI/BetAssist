@@ -1,4 +1,4 @@
-name: betassist_app
+name: betassist
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -28,6 +28,32 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  betassist_sdk:
+    path: .rokct/cache/betassist
+  fav_sdk:
+    path: .rokct/cache/fav
+  base_sdk:
+    path: .rokct/cache/base
+  auth_sdk:
+    path: .rokct/cache/auth
+  users_sdk:
+    path: .rokct/cache/users
+  onboarding_sdk:
+    path: .rokct/cache/onboarding
+  wallet_sdk:
+    path: .rokct/cache/wallet
+  comms_sdk:
+    path: .rokct/cache/comms
+  telemetry_sdk:
+    path: .rokct/cache/telemetry
+  processing_sdk:
+    path: .rokct/cache/processing
+  corporate_sdk:
+    path: .rokct/cache/corporate
+  desktop_sdk:
+    path: .rokct/cache/desktop
+  hms_sdk:
+    path: .rokct/cache/hms
   flutter:
     sdk: flutter
 
@@ -87,3 +113,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+dependency_overrides:
+  sqlite3: 2.9.4
