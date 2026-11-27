@@ -57,6 +57,15 @@
       "_sha256_comment": "SHA-256 of users/dart/install.py at Users@55048d34; required by the composer's unpinned-installer gate. Update when upstream install.py changes."
     },
     {
+      "name": "onboarding_sdk",
+      "enabled": true,
+      "source": "git",
+      "git": "https://github.com/RokctAI/Users",
+      "path": "../Users/onboarding/dart",
+      "ref": "main",
+      "sha256": "5980c6a541ec6334686b10a08932c4e4967c835cb99ec6e9097fc25f4f324076"
+    },
+    {
       "name": "wallet_sdk",
       "enabled": true,
       "source": "git",
