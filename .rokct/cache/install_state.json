@@ -1,0 +1,721 @@
+{
+  "packages": {
+    "betassist_sdk": {
+      "version": "1.5.0",
+      "files": {},
+      "routes": [],
+      "app_routes": [],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [],
+      "di_hooks": [],
+      "boot_hooks": [
+        {
+          "id": "betassist-af-bundled-translations",
+          "order": 61,
+          "body": "BundledTranslations.register('af', kBetassistAfTranslations);",
+          "imports": [
+            "import 'package:base_sdk/src/services/bundled_translations.dart';",
+            "import 'package:betassist_sdk/src/translations/betassist_af_translations.dart';"
+          ],
+          "_comment": "Registers this SDK's bundled copy for its manifest tr_keys at boot (lms_sdk precedent). Backend-served rows still win."
+        },
+        {
+          "id": "betassist-en-bundled-translations",
+          "order": 62,
+          "body": "BundledTranslations.register('en', kBetassistEnTranslations);",
+          "imports": [
+            "import 'package:base_sdk/src/services/bundled_translations.dart';",
+            "import 'package:betassist_sdk/src/translations/betassist_en_translations.dart';"
+          ],
+          "_comment": "Registers this SDK's bundled copy for its manifest tr_keys at boot (lms_sdk precedent). Backend-served rows still win."
+        },
+        {
+          "id": "betassist-splash",
+          "order": 65,
+          "body": "SplashArt.builder = (context) => const BetAssistSplash();",
+          "imports": [
+            "import 'package:base_sdk/base_sdk.dart';"
+          ],
+          "_comment": "Ray approved this splash (login-per-app/approved/APPROVED.md, 28 Nov 2026); base_sdk 1.116.0 draws it in code."
+        },
+        {
+          "id": "betassist-login-page",
+          "order": 64,
+          "body": "AuthEntryConfig.pageBuilder = (context, actions) => BetassistLoginPage(onLogin: actions.login, onSkip: actions.skip, onRegister: actions.register);",
+          "imports": [
+            "import 'package:auth_sdk/src/common/services/entry_config.dart';",
+            "import 'package:betassist_sdk/src/common/presentation/pages/login/betassist_login_page.dart';"
+          ],
+          "_comment": "Draws this app's approved login (login-per-app/approved/APPROVED.md, Ray 27-28 Nov 2026) through auth_sdk >= 1.25.0's AuthEntryConfig.pageBuilder. The callbacks are auth_sdk's own sign-in actions."
+        }
+      ],
+      "tr_keys": {
+        "betassistAiPredictionConfidence": "betassist_ai_prediction_confidence",
+        "betassistTapCardToFlipAnalysis": "betassist_tap_card_to_flip_analysis",
+        "betassistLiveAlignmentReport": "betassist_live_alignment_report",
+        "betassistBiasDanger": "betassist_bias_danger",
+        "betassistStrengths": "betassist_strengths",
+        "betassistVulnerabilities": "betassist_vulnerabilities",
+        "betassistBettingBlocked": "betassist_betting_blocked",
+        "betassistUnfollowedMatch": "betassist_unfollowed_match",
+        "betassistRecommendedRiskStake": "betassist_recommended_risk_stake",
+        "betassistCalculatedViaThe2MonthlyBudgetRule": "betassist_calculated_via_the_2_monthly_budget_rule",
+        "betassistPlaceDisciplinedBetNow": "betassist_place_disciplined_bet_now",
+        "betassistSnappedBackTo2dDashboardCameraInactive": "betassist_snapped_back_to_2d_dashboard_camera_inactive",
+        "betassistTvScannerActive": "betassist_tv_scanner_active",
+        "betassistTiltPhoneDownToSnapToDashboard": "betassist_tilt_phone_down_to_snap_to_dashboard",
+        "betassistSupportYourLocalTeam": "betassist_support_your_local_team",
+        "betassistSelectLocalFavorite": "betassist_select_local_favorite",
+        "betassistSupportYourInternationalTeam": "betassist_support_your_international_team",
+        "betassistSelectInternationalFavorite": "betassist_select_international_favorite",
+        "betassistSetYourLimits": "betassist_set_your_limits",
+        "betassistLoginTitle": "betassist_login_title",
+        "betassistLoginModelEstimates": "betassist_login_model_estimates",
+        "betassistLoginSignUp": "betassist_login_sign_up",
+        "betassistLoginLogIn": "betassist_login_log_in",
+        "betassistLoginResponsibly": "betassist_login_responsibly"
+      },
+      "app_assets": [
+        "assets/images/splash.png",
+        "assets/images/splash1.png",
+        "assets/images/splash2.png"
+      ]
+    },
+    "fav_sdk": {
+      "version": "1.1.3",
+      "files": {},
+      "routes": [],
+      "app_routes": [],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [],
+      "di_hooks": [],
+      "boot_hooks": [],
+      "database": {
+        "tables": [
+          {
+            "class": "ShopTable",
+            "import": "package:fav_sdk/src/common/infrastructure/database/drift_tables.dart"
+          }
+        ],
+        "migration": {
+          "version": 12,
+          "step": "if (from < 6) { await m.createTable(shopTable); }"
+        }
+      }
+    },
+    "base_sdk": {
+      "version": "1.116.1",
+      "files": {
+        "lib/main.dart": "1e386ac58c0f0508f0553b18136e7613f10f5d2536b8f9f036453155e2762051",
+        "lib/presentation/app_widget.dart": "31cc82c45b6e2d88a1ecfe7609daec187095a7be9b8846f1963ebeedead7433e",
+        "lib/presentation/routes/app_router.dart": "3b99e50c60dab1161ccf14aa381f7481ab1baad0223575df04e4bda89a20464b",
+        "lib/presentation/routes/route_pages.dart": "32ab7543d1b94e5b5aedd5a59604a390c373d6e881801c875e37f2ddd001d8c8",
+        "lib/presentation/theme/theme.dart": "dccd0527934c068d0b8ef48d7d0677d068d1054e7fcc1e1eea1f6682912bfcd5",
+        "lib/presentation/theme/app_style.dart": "a45367fab06abafa465a15d659d631e344f3c1badc06a8880b2298eaf063c535"
+      },
+      "routes": [
+        {
+          "path": "/",
+          "page": "SplashRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/route_pages.dart"
+        },
+        {
+          "path": "/no-connection",
+          "page": "NoConnectionRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/route_pages.dart"
+        },
+        {
+          "path": "/maintenance",
+          "page": "MaintenanceRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/route_pages.dart"
+        },
+        {
+          "path": "/generic-profile",
+          "page": "GenericProfileRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/route_pages.dart"
+        }
+      ],
+      "app_routes": [
+        {
+          "method": "replaceSplashRoute",
+          "body": "context.router.replace(SplashRoute());",
+          "imports": [
+            "import 'package:auto_route/auto_route.dart';",
+            "import 'package:${package}/presentation/routes/app_router.dart';"
+          ]
+        },
+        {
+          "method": "replaceNoConnectionRoute",
+          "body": "context.router.replace(NoConnectionRoute());",
+          "imports": [
+            "import 'package:auto_route/auto_route.dart';",
+            "import 'package:${package}/presentation/routes/app_router.dart';"
+          ]
+        },
+        {
+          "method": "replaceMaintenanceRoute",
+          "body": "context.router.replace(MaintenanceRoute());",
+          "imports": [
+            "import 'package:auto_route/auto_route.dart';",
+            "import 'package:${package}/presentation/routes/app_router.dart';"
+          ]
+        },
+        {
+          "method": "pushGenericProfileRoute",
+          "body": "context.router.push(GenericProfileRoute());",
+          "imports": [
+            "import 'package:auto_route/auto_route.dart';",
+            "import 'package:${package}/presentation/routes/app_router.dart';"
+          ]
+        }
+      ],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [],
+      "di_hooks": [],
+      "boot_hooks": [],
+      "database": {
+        "_comment": "No 'tables' key on purpose. base_sdk's own tables (KeyValueTable, OutboxTable, IdMappingsTable) are declared directly in the @DriftDatabase annotation in lib/src/database/app_database.dart, and the installer COPIES every table source named here into base_sdk's own package to import relatively - so listing them would compile two copies of each class. Only the migration is declared.",
+        "_comment_migration": "THE MIGRATION VERSION NUMBER IS SHARED WITH EVERY OTHER SDK IN THE APP, AND IS NOT THIS SDK'S TO COUNT ALONE. sdk_installer_base.py update_database_registration() sets the composed AppDatabase's schemaVersion to the MAXIMUM version any composed manifest declares, while each SDK writes its own `if (from < N)` guard into the one shared onUpgrade - one namespace, no allocator. Drift calls onUpgrade only when schemaVersion is GREATER than the stored user_version, so a number at or below the running maximum runs nothing at all on a device that is already there, and the column this step adds would simply never appear (productivity_sdk lost its notes table to exactly this, and this manifest's number is chosen the way that manifest's comment says to). Two further traps are specific to base: the composer SUBSTITUTES the schemaVersion getter in app_database.dart, so a base-owned number written only in Dart is erased at compose time; and max_version is only raised inside the installer's `if version and step` branch, so a version declared without a step raises nothing. Hence both, declared here. VERSIONS READ ACROSS THE FLEET BEFORE CLAIMING 19 (every manifest.json outside a .rokct/cache in every repo reachable from this workspace, read at their current main): radio_sdk 18 (agent/radio/dart), productivity_sdk 17 (productivity/productivity/dart), auth_sdk 16 (Users/auth/dart), agent_sdk 15 (agent/agent/dart), replay_sdk 15 (agent/replay/dart), subscriptions_sdk 15 (agent/subscriptions/dart), polaris_sdk 13 (corporate/polaris/dart), fav_sdk 12 (agent/fav/dart); no other manifest declares a database.migration at all - base_sdk, launch_sdk, comms_sdk and telemetry_sdk in this repo included, until now. 19 is above all of them. NOTE for whoever reads this next: radio_sdk's 17 and productivity_sdk's 17 are a LIVE COLLISION on that number (radio's own comment still records productivity at 14), which is not this PR's to fix but is the same defect all of this text is about. The step is idempotent - ensureOwnerScopeColumns() checks for the column before touching anything - and beforeOpen in app_database.dart calls it on every open as a floor, so a device that somehow skips this step still gets the column rather than throwing on its first read.",
+        "migration": {
+          "version": 19,
+          "step": "if (from < 19) { await ensureOwnerScopeColumns(); }"
+        }
+      },
+      "app_assets": [
+        "assets/audio/tap.wav",
+        "assets/audio/wrong.wav",
+        "assets/images/app_logo.png",
+        "assets/images/card.png",
+        "assets/images/cardBg.png",
+        "assets/images/delivery.png",
+        "assets/images/door.png",
+        "assets/images/fast.png",
+        "assets/images/logo.png",
+        "assets/images/notFound.png",
+        "assets/images/order.png",
+        "assets/images/save.png",
+        "assets/images/set.png",
+        "assets/images/splash.png",
+        "assets/images/splash1.png",
+        "assets/images/splash2.png",
+        "assets/images/visa.png",
+        "assets/lottie/girl_empty.json",
+        "assets/lottie/not-found.json",
+        "assets/lottie/not_found_page.json",
+        "assets/lottie/notification_empty.json",
+        "assets/lottie/processing.json",
+        "assets/svgs/adress.svg",
+        "assets/svgs/avatar.svg",
+        "assets/svgs/brand_logo_rounded.svg",
+        "assets/svgs/contact.svg",
+        "assets/svgs/delivery.svg",
+        "assets/svgs/delivery2.svg",
+        "assets/svgs/delivery_time.svg",
+        "assets/svgs/discount.svg",
+        "assets/svgs/empty.svg",
+        "assets/svgs/filter.svg",
+        "assets/svgs/orderTime.svg",
+        "assets/svgs/pickUpFrom.svg",
+        "assets/svgs/star.svg",
+        "assets/svgs/ticket.svg"
+      ],
+      "platform_permissions": {
+        "android": [
+          "rokct.permission.SESSION_HANDOFF"
+        ],
+        "ios": {}
+      }
+    },
+    "auth_sdk": {
+      "version": "1.25.0",
+      "files": {
+        "lib/presentation/routes/auth_route_pages.dart": "324cea053914435dd428174b60946c6431dc15ca8e8e8df2a69f66c2cad4f3c5",
+        "lib/presentation/routes/registration_step_pages.dart": "68aed195fc07db746a0919c7ba6d47ffa445ca86e7d9cf6ee50fbcb00e82d3c2",
+        "lib/presentation/routes/auth_session_policy.dart": "9524d696f956a99c2964ce0866cbab0cb282e868247d5f08b050e94bb9f5df5a"
+      },
+      "routes": [
+        {
+          "path": "/login",
+          "page": "LoginRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/auth_route_pages.dart"
+        },
+        {
+          "path": "/register",
+          "page": "RegisterRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/auth_route_pages.dart"
+        },
+        {
+          "path": "/register-confirmation",
+          "page": "RegisterConfirmationRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/auth_route_pages.dart"
+        },
+        {
+          "path": "/reset-password",
+          "page": "ResetPasswordRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/auth_route_pages.dart"
+        },
+        {
+          "path": "/registration-steps",
+          "page": "RegistrationStepsRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/registration_step_pages.dart"
+        }
+      ],
+      "app_routes": [
+        {
+          "method": "replaceLoginRoute",
+          "body": "context.router.replace(LoginRoute());",
+          "imports": [
+            "import 'package:${package}/presentation/routes/app_router.dart';"
+          ]
+        },
+        {
+          "method": "pushLoginRoute",
+          "body": "context.router.push(LoginRoute());",
+          "imports": [
+            "import 'package:${package}/presentation/routes/app_router.dart';"
+          ]
+        }
+      ],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [
+        {
+          "method": "phoneVerify",
+          "params": "",
+          "body": "return const PhoneVerify();",
+          "imports": [
+            "import 'package:auth_sdk/src/common/presentation/pages/auth/phone_verify.dart';"
+          ]
+        },
+        {
+          "method": "resetPasswordPage",
+          "params": "",
+          "body": "return const ResetPasswordPage();",
+          "imports": [
+            "import 'package:auth_sdk/src/common/presentation/pages/auth/reset/reset_password_page.dart';"
+          ]
+        }
+      ],
+      "di_hooks": [],
+      "boot_hooks": [
+        {
+          "id": "auth-af-bundled-translations",
+          "order": 64,
+          "body": "BundledTranslations.register('af', kAuthAfTranslations);",
+          "imports": [
+            "import 'package:base_sdk/src/services/bundled_translations.dart';",
+            "import 'package:auth_sdk/src/translations/auth_af_translations.dart';"
+          ],
+          "_comment": "Registers this SDK's bundled Afrikaans (af) map into base_sdk's BundledTranslations at boot. Backend-served rows still win."
+        },
+        {
+          "id": "auth_pending_otp_gate",
+          "order": 0,
+          "body": "PendingOtpGate.install();"
+        },
+        {
+          "id": "auth_restore_credential_gate",
+          "order": 1,
+          "body": "RestoreCredentialGate.install(); SessionEndHooks.register('restore_credentials', RestoreCredentialGate.clear);"
+        },
+        {
+          "id": "auth_en_bundled_translations",
+          "order": 2,
+          "body": "BundledTranslations.register('en', kAuthEnTranslations);",
+          "imports": [
+            "import 'package:base_sdk/src/services/bundled_translations.dart';",
+            "import 'package:auth_sdk/src/translations/auth_en_translations.dart';"
+          ],
+          "_comment": "Registers this SDK's bundled English map into base_sdk's BundledTranslations registry at boot (lms_sdk's 'af' hook is the precedent). base_sdk bundles no 'en' map because English normally survives through the humanized-key fallback, but that only holds for keys named after their copy: reset_password_text humanized to the literal \"Reset password text\" on every app shell's reset-password sheet, because demo builds take their served map from comms_sdk's MockSettingsRepository (a handful of rows that never carried this key). Backend-served translation rows still win; the map is only the offline/unseeded fallback consulted before the humanized-key fallback. Imports are declared explicitly (src paths, like lms_sdk) because neither symbol is exported by the auth_sdk barrel every composed main.dart already imports. Requires a base_sdk with bundled_translations.dart (the bundled-af wave)."
+        },
+        {
+          "id": "auth_fcm_token_sync",
+          "order": 3,
+          "body": "FcmTokenSync.install();",
+          "imports": [
+            "import 'package:auth_sdk/src/common/services/platform_support.dart';"
+          ],
+          "_comment": "Keeps the backend's FCM token current between sign-ins: once the first frame is up (LocalStorage and DI are ready by then) it re-sends the token if a backend session is already active, and re-sends every token FirebaseMessaging.onTokenRefresh hands out while signed in. No-op on Windows/Linux and when Firebase is not initialized; fail-open."
+        },
+        {
+          "id": "auth_session_handoff_gate",
+          "order": 4,
+          "body": "SessionHandoffGate.install();",
+          "_comment": "Shared sign-in between same-key fleet apps (see _comment_version_1_22_0). Declares no 'imports' entry: the gate is exported from package:auth_sdk/auth_sdk.dart, which every composed main.dart already imports. Inert on every platform but Android, and on a shell whose MainActivity does not register base_sdk's SessionHandoffBridge (base_sdk >= 1.90.0 template)."
+        }
+      ],
+      "database": {
+        "tables": [
+          {
+            "class": "OfflineUsersTable",
+            "import": "package:auth_sdk/src/common/infrastructure/database/offline_user_table.dart"
+          }
+        ],
+        "migration": {
+          "version": 16,
+          "step": "if (from < 16) { await m.createTable(offlineUsersTable); }"
+        }
+      },
+      "app_assets": [
+        "assets/demo/auth/"
+      ]
+    },
+    "users_sdk": {
+      "version": "1.5.4",
+      "files": {},
+      "routes": [],
+      "app_routes": [],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [],
+      "di_hooks": [],
+      "boot_hooks": [],
+      "app_assets": [
+        "assets/demo/users/"
+      ]
+    },
+    "wallet_sdk": {
+      "version": "1.9.5",
+      "files": {
+        "lib/presentation/routes/wallet_route_pages.dart": "86d07bc5c2e239b713c49a9caa4f2dc6007ec1e20aa9519aeb960f3fcc8ee5a7"
+      },
+      "routes": [
+        {
+          "path": "/wallet-topup",
+          "page": "WalletTopUpRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/wallet_route_pages.dart"
+        },
+        {
+          "path": "/wallet-history",
+          "page": "WalletHistoryRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/wallet_route_pages.dart"
+        }
+      ],
+      "app_routes": [
+        {
+          "method": "pushWalletHistoryRoute",
+          "body": "context.router.push(WalletHistoryRoute());",
+          "imports": [
+            "import 'package:${package}/presentation/routes/app_router.dart';"
+          ]
+        }
+      ],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [],
+      "di_hooks": [
+        {
+          "id": "wallet-profile-section",
+          "order": 20,
+          "body": "registerWalletProfileSection();",
+          "imports": [
+            "import 'package:${package}/presentation/routes/wallet_route_pages.dart';"
+          ],
+          "_comment": "Registers the 'wallet.card' profile section (base_sdk's BaseWalletCard composed with this SDK's history/top-up routes and Send sheet) with base_sdk's ProfileSectionRegistry - the wallet card base_sdk's GenericProfilePage renders on any composed profile route. Declared top-level, NOT in an app_type flavor block, mirroring marketplace_sdk's marketplace-profile-sections hook. Configuration rides WalletCardSection's static seam (visible / symbol / extraActions / showActions), set by a home SDK's own di_hook. Order 20 leaves room for a lower-order home-SDK hook to configure the seam before registration - though the builder and gate also re-read the seam on every page mount, so a later hook still takes effect. Requires base_sdk >= 1.23.0 (the profile host) and >= 1.33.0 (BaseWalletCard `wallet` param)."
+        }
+      ],
+      "boot_hooks": [
+        {
+          "id": "wallet-af-bundled-translations",
+          "order": 64,
+          "body": "BundledTranslations.register('af', kWalletAfTranslations);",
+          "imports": [
+            "import 'package:base_sdk/src/services/bundled_translations.dart';",
+            "import 'package:wallet_sdk/src/translations/wallet_af_translations.dart';"
+          ],
+          "_comment": "Registers this SDK's bundled Afrikaans (af) map into base_sdk's BundledTranslations at boot. Backend-served rows still win."
+        },
+        {
+          "id": "wallet-en-bundled-translations",
+          "order": 63,
+          "body": "BundledTranslations.register('en', kWalletEnTranslations);",
+          "imports": [
+            "import 'package:base_sdk/src/services/bundled_translations.dart';",
+            "import 'package:wallet_sdk/src/common/translations/wallet_translations.dart';"
+          ],
+          "_comment": "Registers wallet_sdk's bundled English for its manifest tr_keys (card auto-billing copy: the new-card button, the automatic-renewal consent, saved cards, the row detail sheet) into base_sdk's BundledTranslations at boot, the lms_sdk / auth_sdk pattern. Backend-served rows still win; these keys name their strings, so the humanized-key fallback would not read well."
+        }
+      ],
+      "tr_keys": {
+        "payWithANewCard": "pay_with_a_new_card",
+        "saveCardForRenewals": "save_card_for_automatic_renewals",
+        "cardRenewalConsent": "card_automatic_renewal_consent",
+        "acceptCardConsentFirst": "accept_card_consent_first",
+        "cardCheckoutTitle": "card_checkout_title",
+        "cardCheckoutWaiting": "card_checkout_waiting",
+        "cardCheckoutCancelled": "card_checkout_cancelled",
+        "cardCheckoutFailed": "card_checkout_failed",
+        "cardSavedForRenewals": "card_saved_for_automatic_renewals",
+        "walletSavedCards": "wallet_saved_cards",
+        "removeCard": "remove_card",
+        "removeCardConfirm": "remove_card_confirm",
+        "cardRemoved": "card_removed",
+        "renewsAutomatically": "renews_automatically",
+        "walletTransactionDetails": "wallet_transaction_details",
+        "walletReference": "wallet_reference",
+        "walletTransactionType": "wallet_transaction_type",
+        "walletStatus": "wallet_status"
+      },
+      "app_assets": [
+        "assets/demo/wallet/"
+      ]
+    },
+    "comms_sdk": {
+      "version": "1.23.7",
+      "files": {},
+      "routes": [],
+      "app_routes": [],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [
+        {
+          "method": "languageScreen",
+          "params": "{required VoidCallback onSave}",
+          "body": "return LanguageScreen(onSave: onSave);",
+          "imports": [
+            "import 'package:comms_sdk/src/common/presentation/pages/setting/language_page.dart';"
+          ]
+        },
+        {
+          "method": "chatPage",
+          "params": "{required String roleId, required String name}",
+          "body": "return ChatPage(roleId: roleId, name: name);",
+          "imports": [
+            "import 'package:comms_sdk/src/common/presentation/pages/chat/chat/chat_page.dart';"
+          ]
+        }
+      ],
+      "di_hooks": [],
+      "boot_hooks": [
+        {
+          "id": "comms-en-bundled-translations",
+          "order": 65,
+          "body": "BundledTranslations.register('en', kCommsEnTranslations);",
+          "imports": [
+            "import 'package:base_sdk/src/services/bundled_translations.dart';",
+            "import 'package:comms_sdk/src/translations/comms_en_translations.dart';"
+          ],
+          "_comment": "Registers this SDK's bundled English (en) map into base_sdk's BundledTranslations at boot. Backend-served rows still win."
+        },
+        {
+          "id": "comms-af-bundled-translations",
+          "order": 64,
+          "body": "BundledTranslations.register('af', kCommsAfTranslations);",
+          "imports": [
+            "import 'package:base_sdk/src/services/bundled_translations.dart';",
+            "import 'package:comms_sdk/src/translations/comms_af_translations.dart';"
+          ],
+          "_comment": "Registers this SDK's bundled Afrikaans (af) map into base_sdk's BundledTranslations at boot. Backend-served rows still win."
+        },
+        {
+          "id": "comms-live-activity-sink",
+          "order": 40,
+          "body": "LiveActivities.instance.sink ??= DeviceLiveActivitySink();",
+          "_comment": "Live notifications (design approved 2026-09-26). Registers the device sink into base_sdk's LiveActivities (base_sdk >= 1.76.0), so orders, delivery and lms publish snapshots without importing comms_sdk. Registration only: nothing is drawn until an adopter publishes. No 'imports' entry: main.dart already imports base_sdk and comms_sdk (which exports DeviceLiveActivitySink)."
+        },
+        {
+          "id": "comms-push-permission-on-sign-in",
+          "order": 30,
+          "body": "SessionStartHooks.register(PushPermissionPrompt.hookId, PushPermissionPrompt.onSessionStart);",
+          "_comment": "Ray, 2026-09-25: ask for notification permission after a successful sign-in, in every app that composes comms_sdk (before 1.18.0 only merchants' manager shell and delivery's driver home asked; supacharge, paas_customer and the rest never did). Subscribes PushPermissionPrompt to base_sdk's SessionStartHooks (base_sdk >= 1.75.0), which auth_sdk >= 1.15.0 runs once a session is established; neither SDK depends on the other. PushPermissionPrompt skips demo sessions (DemoSession.demoActive), asks at most once per install (a LocalStorage JSON flag set only once the OS was actually asked), and goes through PushPermissionService, so platform guard, fail-open catch and in-flight de-duplication all still apply. Registration only: nothing runs at boot. No 'imports' entry: every composed main.dart already imports package:base_sdk/base_sdk.dart and package:comms_sdk/comms_sdk.dart (which exports PushPermissionPrompt) in its @generated-sdk-imports block."
+        },
+        {
+          "id": "comms-firebase-fcm-boot",
+          "order": 10,
+          "body": "if (!kIsWeb && (defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.macOS)) {\n  try {\n    if (Firebase.apps.isEmpty) {\n      await Firebase.initializeApp();\n    }\n    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);\n  } catch (e) {\n    debugPrint('Firebase boot skipped: $e');\n  }\n}",
+          "imports": [
+            "import 'package:flutter/foundation.dart';",
+            "import 'package:firebase_core/firebase_core.dart';",
+            "import 'package:firebase_messaging/firebase_messaging.dart';",
+            "import 'package:comms_sdk/src/common/services/firebase_background_handler.dart';"
+          ]
+        },
+        {
+          "id": "comms-desktop-notification-poller-boot",
+          "order": 20,
+          "body": "if (!kIsWeb && defaultTargetPlatform == TargetPlatform.windows) {\n  WidgetsBinding.instance.addPostFrameCallback((_) {\n    try {\n      DesktopNotificationPoller.instance.start();\n    } catch (e) {\n      debugPrint('Desktop notification poller boot skipped: $e');\n    }\n  });\n}",
+          "imports": [
+            "import 'package:flutter/foundation.dart';",
+            "import 'package:comms_sdk/src/common/services/desktop_notification_poller.dart';"
+          ],
+          "_comment": "Windows notification delivery, POS parity (1.6.0): firebase_messaging has no Windows implementation, so the FCM hook above deliberately excludes Windows and composed Windows exes shipped with NO notification path at all. This hook starts comms' DesktopNotificationPoller (10s REST count polling + looping POS notification.wav + ValueNotifier badge feed - see the service's doc comment) on Windows only. The start is deferred to addPostFrameCallback because boot-hook bodies run BEFORE LocalStorage.init() and the sdk-di block in the generated main.dart: by first frame both are done, and runApp is never delayed by a poll. Fail-open try/catch like the FCM hook - a boot failure debugPrints instead of blanking the app. WidgetsBinding resolves via main.dart's static material import; foundation dedupes with the FCM hook's wiring import. Toast layer (still 1.6.0, same unmerged PR): poller.start() also initializes LocalNotifications fail-open (flutter_local_notifications 19.x WindowsInitializationSettings - stable hardcoded GUID, APP_NAME/WINDOWS_AUMID dart-defines for branding, works unpackaged; MSIX identity optional host-side) and each count increase raises a native toast via LocalNotifications.show() alongside the sound - no hook body change needed, the toast path lives entirely inside the service."
+        },
+        {
+          "id": "comms-push-message-dispatch",
+          "order": 15,
+          "body": "if (!kIsWeb && (defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.macOS)) {\n  try {\n    PushMessageDispatcher.instance.start();\n  } catch (e) {\n    debugPrint('Push message dispatch skipped: $e');\n  }\n}",
+          "imports": [
+            "import 'package:flutter/foundation.dart';"
+          ],
+          "_comment": "Feeds received FCM messages into base_sdk's PushMessages (base_sdk >= 1.79.0) by data['type'], so a feature SDK handles its own pushes without importing comms_sdk (orders_sdk registers 'order_status' for its ActiveOrderTracker). Foreground messages and taps that open the app dispatch at once; a message that arrives while the app is suspended or closed is queued by firebaseMessagingBackgroundHandler and replayed at start and on resume. Runs after comms-firebase-fcm-boot (order 10). comms_sdk exports PushMessageDispatcher, so no package import is needed."
+        }
+      ],
+      "app_assets": [
+        "assets/demo/comms/"
+      ],
+      "platform_permissions": {
+        "android": [
+          "android.permission.POST_NOTIFICATIONS",
+          "android.permission.VIBRATE"
+        ],
+        "ios": {}
+      }
+    },
+    "telemetry_sdk": {
+      "version": "1.1.2",
+      "files": {},
+      "routes": [],
+      "app_routes": [],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [],
+      "di_hooks": [],
+      "boot_hooks": []
+    },
+    "processing_sdk": {
+      "version": "1.0.2",
+      "files": {},
+      "routes": [],
+      "app_routes": [],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [],
+      "di_hooks": [],
+      "boot_hooks": []
+    },
+    "corporate_sdk": {
+      "version": "1.2.1",
+      "files": {
+        "lib/presentation/routes/corporate_route_pages.dart": "7bd7deacfebf5ae507821ca4778a460cb5ac709158254b1ae725003efc6992fe"
+      },
+      "routes": [
+        {
+          "path": "/term",
+          "page": "TermRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/corporate_route_pages.dart"
+        },
+        {
+          "path": "/policy",
+          "page": "PolicyRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/corporate_route_pages.dart"
+        }
+      ],
+      "app_routes": [],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [
+        {
+          "method": "policyPage",
+          "params": "",
+          "body": "return const PolicyPage();"
+        },
+        {
+          "method": "termPage",
+          "params": "",
+          "body": "return const TermPage();"
+        }
+      ],
+      "di_hooks": [],
+      "boot_hooks": []
+    },
+    "desktop_sdk": {
+      "version": "1.2.3",
+      "files": {},
+      "routes": [],
+      "app_routes": [],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [],
+      "di_hooks": [],
+      "boot_hooks": []
+    },
+    "hms_sdk": {
+      "version": "1.1.1",
+      "files": {},
+      "routes": [],
+      "app_routes": [],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [],
+      "di_hooks": [],
+      "boot_hooks": [
+        {
+          "id": "hms-push-boot",
+          "order": 30,
+          "body": "if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {\n  try {\n    await HmsPushBootstrap.instance.initialize();\n  } catch (e) {\n    debugPrint('HMS push boot skipped: $e');\n  }\n}",
+          "imports": [
+            "import 'package:flutter/foundation.dart';",
+            "import 'package:hms_sdk/src/services/hms_push_bootstrap.dart';"
+          ],
+          "_comment": "Order 30: after comms' Firebase/FCM boot (10) and its desktop notification poller (20) - order 20 is already taken and duplicate orders draw a composer warning. Android-only and fail-open like comms' hooks. The initialize() call itself is a strict no-op unless DeviceServices proves the device GMS-free AND HMS-capable, so GMS devices and detection errors keep comms_sdk's FCM path as the sole push owner. The await is cheap: initialize() only awaits the availability probe and turnOnPush - the push token arrives asynchronously on Push Kit's token stream, so runApp is never delayed by a token round-trip."
+        }
+      ]
+    }
+  },
+  "sdk_cache": {
+    "betassist": {
+      "version": "1.5.0",
+      "hash": "5f24433b1ad28859"
+    },
+    "fav": {
+      "version": "1.1.3",
+      "hash": "074fe7243b6478c1"
+    },
+    "base": {
+      "version": "1.116.1",
+      "hash": "3d294c176daa6e9b"
+    },
+    "comms": {
+      "version": "1.23.7",
+      "hash": "c0d5590501b40f84"
+    },
+    "telemetry": {
+      "version": "1.1.2",
+      "hash": "c00e718e39b9e718"
+    },
+    "auth": {
+      "version": "1.25.0",
+      "hash": "64c92f241ced915e"
+    },
+    "users": {
+      "version": "1.5.4",
+      "hash": "3e77e6342dfd0f4b"
+    },
+    "wallet": {
+      "version": "1.9.5",
+      "hash": "abc842c5f67265db"
+    },
+    "processing": {
+      "version": "1.0.2",
+      "hash": "1de5c2d23853daab"
+    },
+    "corporate": {
+      "version": "1.2.1",
+      "hash": "5c58ebeee3618e89"
+    },
+    "desktop": {
+      "version": "1.2.3",
+      "hash": "808a03076bc43bf3"
+    },
+    "hms": {
+      "version": "1.1.1",
+      "hash": "72d1aec656d62954"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "name": "betassist_sdk",
+  "version": "1.5.0",
+  "_comment_version_1_5_0": "1.4.0 -> 1.5.0: the approved BetAssist splash drawn in code through base_sdk 1.116.0 SplashArt (Ray, 28 Nov 2026). No cmd or route changed.",
+  "_comment_version_1_3_0": "1.2.3 -> 1.3.0: feat(i18n). Hardcoded UI copy goes through trkeys (Ray, 2026-11-20): new betassist_* tr_keys with bundled English and Afrikaans copy. Existing keys unchanged.",
+  "_comment_version_1_2_3": "1.2.2 -> 1.2.3: version for the coach-mark guide mounted on this SDK's primary page (GuideHost and GuideAnchor from base_sdk 1.92.0, off in demo sessions). The mount landed without a version change; see CHANGELOG.",
+  "installs": [
+    {
+      "from": "templates/assets",
+      "to": "assets"
+    }
+  ],
+  "app_assets": [
+    "assets/images/splash.png",
+    "assets/images/splash1.png",
+    "assets/images/splash2.png"
+  ],
+  "_comment_app_assets": "Home SDKs ship the splash/login background images (base_sdk's splash_page and auth_sdk's login_page reference assets/images/splash*.png). Each home SDK provides its own copies so every composed app can brand them independently; app_assets gets them into the host pubspec's sdk-app-assets block so they are actually bundled. If base_sdk also installed identical files first, the file copy is skipped (already-present guard) and only the pubspec declaration matters.",
+  "routes": [],
+  "tr_keys": {
+    "betassistAiPredictionConfidence": "betassist_ai_prediction_confidence",
+    "betassistTapCardToFlipAnalysis": "betassist_tap_card_to_flip_analysis",
+    "betassistLiveAlignmentReport": "betassist_live_alignment_report",
+    "betassistBiasDanger": "betassist_bias_danger",
+    "betassistStrengths": "betassist_strengths",
+    "betassistVulnerabilities": "betassist_vulnerabilities",
+    "betassistBettingBlocked": "betassist_betting_blocked",
+    "betassistUnfollowedMatch": "betassist_unfollowed_match",
+    "betassistRecommendedRiskStake": "betassist_recommended_risk_stake",
+    "betassistCalculatedViaThe2MonthlyBudgetRule": "betassist_calculated_via_the_2_monthly_budget_rule",
+    "betassistPlaceDisciplinedBetNow": "betassist_place_disciplined_bet_now",
+    "betassistSnappedBackTo2dDashboardCameraInactive": "betassist_snapped_back_to_2d_dashboard_camera_inactive",
+    "betassistTvScannerActive": "betassist_tv_scanner_active",
+    "betassistTiltPhoneDownToSnapToDashboard": "betassist_tilt_phone_down_to_snap_to_dashboard",
+    "betassistSupportYourLocalTeam": "betassist_support_your_local_team",
+    "betassistSelectLocalFavorite": "betassist_select_local_favorite",
+    "betassistSupportYourInternationalTeam": "betassist_support_your_international_team",
+    "betassistSelectInternationalFavorite": "betassist_select_international_favorite",
+    "betassistSetYourLimits": "betassist_set_your_limits",
+    "betassistLoginTitle": "betassist_login_title",
+    "betassistLoginModelEstimates": "betassist_login_model_estimates",
+    "betassistLoginSignUp": "betassist_login_sign_up",
+    "betassistLoginLogIn": "betassist_login_log_in",
+    "betassistLoginResponsibly": "betassist_login_responsibly"
+  },
+  "boot_hooks": [
+    {
+      "id": "betassist-af-bundled-translations",
+      "order": 61,
+      "body": "BundledTranslations.register('af', kBetassistAfTranslations);",
+      "imports": [
+        "import 'package:base_sdk/src/services/bundled_translations.dart';",
+        "import 'package:betassist_sdk/src/translations/betassist_af_translations.dart';"
+      ],
+      "_comment": "Registers this SDK's bundled copy for its manifest tr_keys at boot (lms_sdk precedent). Backend-served rows still win."
+    },
+    {
+      "id": "betassist-en-bundled-translations",
+      "order": 62,
+      "body": "BundledTranslations.register('en', kBetassistEnTranslations);",
+      "imports": [
+        "import 'package:base_sdk/src/services/bundled_translations.dart';",
+        "import 'package:betassist_sdk/src/translations/betassist_en_translations.dart';"
+      ],
+      "_comment": "Registers this SDK's bundled copy for its manifest tr_keys at boot (lms_sdk precedent). Backend-served rows still win."
+    },
+    {
+      "id": "betassist-splash",
+      "order": 65,
+      "body": "SplashArt.builder = (context) => const BetAssistSplash();",
+      "imports": [
+        "import 'package:base_sdk/base_sdk.dart';"
+      ],
+      "_comment": "Ray approved this splash (login-per-app/approved/APPROVED.md, 28 Nov 2026); base_sdk 1.116.0 draws it in code."
+    },
+    {
+      "id": "betassist-login-page",
+      "order": 64,
+      "body": "AuthEntryConfig.pageBuilder = (context, actions) => BetassistLoginPage(onLogin: actions.login, onSkip: actions.skip, onRegister: actions.register);",
+      "imports": [
+        "import 'package:auth_sdk/src/common/services/entry_config.dart';",
+        "import 'package:betassist_sdk/src/common/presentation/pages/login/betassist_login_page.dart';"
+      ],
+      "_comment": "Draws this app's approved login (login-per-app/approved/APPROVED.md, Ray 27-28 Nov 2026) through auth_sdk >= 1.25.0's AuthEntryConfig.pageBuilder. The callbacks are auth_sdk's own sign-in actions."
+    }
+  ]
+}
