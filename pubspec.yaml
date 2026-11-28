@@ -38,6 +38,8 @@ dependencies:
     path: .rokct/cache/auth
   users_sdk:
     path: .rokct/cache/users
+  onboarding_sdk:
+    path: .rokct/cache/onboarding
   wallet_sdk:
     path: .rokct/cache/wallet
   comms_sdk:
@@ -48,6 +50,8 @@ dependencies:
     path: .rokct/cache/processing
   corporate_sdk:
     path: .rokct/cache/corporate
+  hardware_sdk:
+    path: .rokct/cache/hardware
   desktop_sdk:
     path: .rokct/cache/desktop
   hms_sdk:
