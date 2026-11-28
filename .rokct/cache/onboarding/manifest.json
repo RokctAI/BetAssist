@@ -1,0 +1,68 @@
+{
+  "name": "onboarding_sdk",
+  "version": "1.4.1",
+  "_comment_version_1_4_0": "1.3.2 -> 1.4.0: feat(i18n). Hardcoded UI copy goes through trkeys (Ray, 2026-11-20): new onboarding_* tr_keys with bundled English and Afrikaans copy. Existing keys unchanged.",
+  "_comment_version_1_3_1": "1.3.0 -> 1.3.1: version for the coach-mark guide mounted on this SDK's primary page (GuideHost and GuideAnchor from base_sdk 1.92.0, off in demo sessions). The mount landed without a version change; see CHANGELOG.",
+  "_comment_version_1_3_0": "1.2.4 -> 1.3.0 (additive, Ray 2026-10-16): host-supplied role cards. IntroDeps gains roleChoices (default empty, so every host that passes none keeps the shipped student + parent/guardian role step exactly), OnboardingRoleChoice (label, subtitle, icon or emoji, rail label, closing caption, optional fixed OnboardingPalette) and a new OnboardingRole.youngChild that is only ever offered through such a choice. A chosen choice's palette paints the rest of the run (surface, cards, buttons, theme brightness) whatever the app mode. The installed shell template gains a roleChoices list with an // @onboarding-role-choices placeholder that a manifest integrations entry fills (lms_sdk: the Supacharge kids path, My child (Grades R-3)). Hosts with an exhaustive switch over OnboardingRole must add the youngChild arm; none of the composed apps has one.",
+  "_comment_version_1_2_2": "1.2.1 -> 1.2.2: the welcome card's motto reads AppConstants.appMotto instead of getTranslation(TrKeys.appMotto) (Ray, 2026-09-23). The motto is app identity, re-pointed per app by a home SDK's constants.overrides; asked through the translation map, that override was never consulted, so with no served 'motto' row the card showed the humanised key, or the old bundled Afrikaans JUVO motto, instead of e.g. Supacharge's \"To the next level\". base_sdk 1.70.0 removes TrKeys.appMotto altogether, so this must merge BEFORE that base change. The app name line already used AppHelpers.getAppName, which falls back to AppConstants.appTitle, and is unchanged.",
+  "_comment_requires": "onboarding_sdk >= 1.2.1 requires base_sdk >= 1.66.6 (the brightness-taking AppStyle colour-role helpers every step of first-run setup now resolves its mode through instead of the app-wide AppStyle.isDark static: inkFor, secondaryInkFor, surfaceFor, cardFor, cardAltFor and strokeFor). onboarding_sdk >= 1.2.0 requires base_sdk >= 1.59.0 (LocalStorage.setOnboardingRun/getOnboardingRun/deleteOnboardingRun over the generic setJson/getJson/deleteJson key API, design 46e); the composer manifest schema has no machine-readable minimum-version field, so this is the declaration. The default OnboardingProgressStore persists the first-run setup record through those accessors and moves a 1.1.0 record from its old private key (onboarding.run) across on first read.",
+  "home_page": "lib/src/common/presentation/pages/intro/intro_page.dart",
+  "installs": [
+    {
+      "from": "templates/routes/onboarding_route_pages.dart",
+      "to": "lib/presentation/routes/onboarding_route_pages.dart"
+    }
+  ],
+  "routes": [
+    {
+      "path": "/onboarding-intro",
+      "page": "OnboardingRoute.page",
+      "type": "MaterialRoute",
+      "import": "package:${package}/presentation/routes/onboarding_route_pages.dart"
+    }
+  ],
+  "embedded_widgets": [
+    {
+      "method": "introPage",
+      "params": "",
+      "body": "return const OnboardingIntroRouteView();",
+      "imports": [
+        "import 'package:${package}/presentation/routes/onboarding_route_pages.dart';"
+      ]
+    }
+  ],
+  "_comment_embedded_widgets": "EmbeddedWidgets.I.introPage(): auth_sdk's LoginPage shows the intro carousel via this indirection so it never imports onboarding_sdk directly (ADR-005). OnboardingIntroRouteView lives in the installed shell template above (templates/routes/onboarding_route_pages.dart -> lib/presentation/routes/onboarding_route_pages.dart), hence the ${package} import — every consuming app gets the same file at the same path.",
+  "integrations": [],
+  "_comment": "The installed shell template (templates/routes/onboarding_route_pages.dart) carries the @generated-onboarding-slides / @generated-onboarding-imports marker blocks that sdk_installer_base.py's update_onboarding_slides() fills from every installed SDK's own manifest 'onboarding_slides' list, plus an @onboarding-complete-hook placeholder for manifest 'integrations' to extend completion routing. database section removed 2026-07-13: it declared OnboardingStatesTable, which is not defined anywhere in this SDK's lib (phantom from the pre-refork era). Re-add together with a real drift_tables.dart when onboarding gets offline state.",
+  "tr_keys": {
+    "onboardingWhoIsSettingThisUp": "onboarding_who_is_setting_this_up",
+    "onboardingIMTheStudent": "onboarding_i_m_the_student",
+    "onboardingIMAParentGuardian": "onboarding_i_m_a_parent_guardian",
+    "onboardingIMTheAdmin": "onboarding_i_m_the_admin",
+    "onboardingFirstRun": "onboarding_first_run",
+    "onboardingWelcome": "onboarding_welcome",
+    "onboardingYouReAllSet": "onboarding_you_re_all_set"
+  },
+  "boot_hooks": [
+    {
+      "id": "onboarding-af-bundled-translations",
+      "order": 61,
+      "body": "BundledTranslations.register('af', kOnboardingAfTranslations);",
+      "imports": [
+        "import 'package:base_sdk/src/services/bundled_translations.dart';",
+        "import 'package:onboarding_sdk/src/translations/onboarding_af_translations.dart';"
+      ],
+      "_comment": "Registers this SDK's bundled copy for its manifest tr_keys at boot (lms_sdk precedent). Backend-served rows still win."
+    },
+    {
+      "id": "onboarding-en-bundled-translations",
+      "order": 62,
+      "body": "BundledTranslations.register('en', kOnboardingEnTranslations);",
+      "imports": [
+        "import 'package:base_sdk/src/services/bundled_translations.dart';",
+        "import 'package:onboarding_sdk/src/translations/onboarding_en_translations.dart';"
+      ],
+      "_comment": "Registers this SDK's bundled copy for its manifest tr_keys at boot (lms_sdk precedent). Backend-served rows still win."
+    }
+  ]
+}

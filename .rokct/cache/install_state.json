@@ -666,6 +666,76 @@
           "_comment": "Order 30: after comms' Firebase/FCM boot (10) and its desktop notification poller (20) - order 20 is already taken and duplicate orders draw a composer warning. Android-only and fail-open like comms' hooks. The initialize() call itself is a strict no-op unless DeviceServices proves the device GMS-free AND HMS-capable, so GMS devices and detection errors keep comms_sdk's FCM path as the sole push owner. The await is cheap: initialize() only awaits the availability probe and turnOnPush - the push token arrives asynchronously on Push Kit's token stream, so runApp is never delayed by a token round-trip."
         }
       ]
+    },
+    "onboarding_sdk": {
+      "version": "1.4.1",
+      "files": {
+        "lib/presentation/routes/onboarding_route_pages.dart": "aa55194e86a20731de27d78a33ef91f8e162931b61e8c9a478516be017be8a2a"
+      },
+      "routes": [
+        {
+          "path": "/onboarding-intro",
+          "page": "OnboardingRoute.page",
+          "type": "MaterialRoute",
+          "import": "package:${package}/presentation/routes/onboarding_route_pages.dart"
+        }
+      ],
+      "app_routes": [],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [
+        {
+          "method": "introPage",
+          "params": "",
+          "body": "return const OnboardingIntroRouteView();",
+          "imports": [
+            "import 'package:${package}/presentation/routes/onboarding_route_pages.dart';"
+          ]
+        }
+      ],
+      "di_hooks": [],
+      "boot_hooks": [
+        {
+          "id": "onboarding-af-bundled-translations",
+          "order": 61,
+          "body": "BundledTranslations.register('af', kOnboardingAfTranslations);",
+          "imports": [
+            "import 'package:base_sdk/src/services/bundled_translations.dart';",
+            "import 'package:onboarding_sdk/src/translations/onboarding_af_translations.dart';"
+          ],
+          "_comment": "Registers this SDK's bundled copy for its manifest tr_keys at boot (lms_sdk precedent). Backend-served rows still win."
+        },
+        {
+          "id": "onboarding-en-bundled-translations",
+          "order": 62,
+          "body": "BundledTranslations.register('en', kOnboardingEnTranslations);",
+          "imports": [
+            "import 'package:base_sdk/src/services/bundled_translations.dart';",
+            "import 'package:onboarding_sdk/src/translations/onboarding_en_translations.dart';"
+          ],
+          "_comment": "Registers this SDK's bundled copy for its manifest tr_keys at boot (lms_sdk precedent). Backend-served rows still win."
+        }
+      ],
+      "tr_keys": {
+        "onboardingWhoIsSettingThisUp": "onboarding_who_is_setting_this_up",
+        "onboardingIMTheStudent": "onboarding_i_m_the_student",
+        "onboardingIMAParentGuardian": "onboarding_i_m_a_parent_guardian",
+        "onboardingIMTheAdmin": "onboarding_i_m_the_admin",
+        "onboardingFirstRun": "onboarding_first_run",
+        "onboardingWelcome": "onboarding_welcome",
+        "onboardingYouReAllSet": "onboarding_you_re_all_set"
+      }
+    },
+    "hardware_sdk": {
+      "version": "1.1.4",
+      "files": {},
+      "routes": [],
+      "app_routes": [],
+      "onboarding_slides": [],
+      "registration_steps": [],
+      "embedded_widgets": [],
+      "di_hooks": [],
+      "boot_hooks": []
     }
   },
   "sdk_cache": {
@@ -679,7 +749,7 @@
     },
     "base": {
       "version": "1.116.1",
-      "hash": "3d294c176daa6e9b"
+      "hash": "1643adee09791b89"
     },
     "comms": {
       "version": "1.23.7",
@@ -716,6 +786,14 @@
     "hms": {
       "version": "1.1.1",
       "hash": "72d1aec656d62954"
+    },
+    "onboarding": {
+      "version": "1.4.1",
+      "hash": "cea4a3126901a240"
+    },
+    "hardware": {
+      "version": "1.1.4",
+      "hash": "9d9fe757f9dee7dd"
     }
   }
 }
