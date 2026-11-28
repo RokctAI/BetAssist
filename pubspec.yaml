@@ -73,6 +73,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  integration_test:
+    sdk: flutter
+  freezed: ^3.2.3
+  build_runner: ^2.10.4
+  auto_route_generator: '>=10.3.1 <10.4.0'
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -121,3 +126,9 @@ dependency_overrides:
   # ranges don't overlap, so arbitrate at the root (same as paas_manager).
   # v11->v12 is API-compatible for plain Permission.x.request() calls.
   permission_handler: ^12.0.1
+  # Same arbitration as polaris and paas_manager: auto_route_generator 10.3
+  # needs auto_route 10.x (SDKs pin ^9.2.0, 10.1+ keeps the 9.x APIs); drift
+  # must admit sqlite3 2.9.4; html 0.15.7 broke flutter_html 3.0.0.
+  auto_route: ^10.3.0
+  drift: 2.31.0
+  html: 0.15.6
