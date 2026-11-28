@@ -1,6 +1,6 @@
 name: betassist_sdk
 description: "Rokct BetAssist AR Scanner and Telemetry Overlay Mobile SDK."
-version: 1.5.0
+version: 1.5.1
 publish_to: 'none'
 
 environment:

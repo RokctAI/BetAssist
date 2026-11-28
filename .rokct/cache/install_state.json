@@ -1,7 +1,7 @@
 {
   "packages": {
     "betassist_sdk": {
-      "version": "1.5.0",
+      "version": "1.5.1",
       "files": {},
       "routes": [],
       "app_routes": [],
@@ -740,8 +740,8 @@
   },
   "sdk_cache": {
     "betassist": {
-      "version": "1.5.0",
-      "hash": "5f24433b1ad28859"
+      "version": "1.5.1",
+      "hash": "bcb4c2543e19879f"
     },
     "fav": {
       "version": "1.1.3",

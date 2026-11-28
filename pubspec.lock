@@ -173,7 +173,7 @@ packages:
       path: ".rokct/cache/betassist"
       relative: true
     source: path
-    version: "1.5.0"
+    version: "1.5.1"
   boolean_selector:
     dependency: transitive
     description:
