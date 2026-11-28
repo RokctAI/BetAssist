@@ -50,6 +50,8 @@ dependencies:
     path: .rokct/cache/processing
   corporate_sdk:
     path: .rokct/cache/corporate
+  hardware_sdk:
+    path: .rokct/cache/hardware
   desktop_sdk:
     path: .rokct/cache/desktop
   hms_sdk:
