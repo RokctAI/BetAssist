@@ -116,6 +116,17 @@
       "_sha256_comment": "SHA-256 of corporate/dart/install.py at corporate@a3a9eb05; required by the composer's unpinned-installer gate. Update when upstream install.py changes."
     },
     {
+      "name": "hardware_sdk",
+      "enabled": true,
+      "source": "git",
+      "git": "https://github.com/RokctAI/hardware",
+      "path": "../hardware/hardware/dart",
+      "ref": "main",
+      "sha256": "6dc903f84e0a45e9128a8564a1dd36f2bce148c05adb0927cf064ff7c6db7ddf",
+      "_sha256_comment": "SHA-256 of hardware/dart/install.py at hardware@2a994ec6; required by the composer's unpinned-installer gate. Update when upstream install.py changes.",
+      "_comment": "Required by betassist_sdk (its pubspec depends on it), so the composed app resolves."
+    },
+    {
       "name": "desktop_sdk",
       "enabled": true,
       "source": "git",
